@@ -12,7 +12,7 @@ const MeetTheOwnerSection = () => {
       <div className=" mx-auto px-6 md:px-8 lg:px-12">
 
 
-        <div className="flex flex-col sm:flex-row  justify-center gap-8 lg:gap-16 items-center ">
+        <div className="flex flex-col md:flex-row  justify-center gap-8 lg:gap-16 items-center ">
           {/* Left: profile card */}
           <div className="flex justify-center md:justify-start py-20">
         
