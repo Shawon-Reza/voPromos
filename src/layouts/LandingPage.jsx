@@ -14,12 +14,12 @@ const LandingPage = () => {
   return (
     <div>
       {/* Navbar section....F */}
-      <section className="bg-[#152136]">
+      <section className="bg-[#152136] fixed w-full top-0 left-0 z-50">
         <Navbar></Navbar>
       </section>
 
       {/* Here Section .......... */}
-      <section>
+      <section className="mt-16">
         <HeroSection></HeroSection>
       </section>
 
@@ -34,7 +34,7 @@ const LandingPage = () => {
       </section>
 
       {/* Why choose us Section */}
-      <section>
+      <section className=" px-6 md:px-8 lg:px-12">
         <WhyChooseUs></WhyChooseUs>
       </section>
 
