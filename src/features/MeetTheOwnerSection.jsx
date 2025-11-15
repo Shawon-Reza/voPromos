@@ -1,5 +1,8 @@
 import React from 'react'
 import owner from '../assets/icons/owner.png'
+import meetoverlap from '../assets/icons/meetoverlap.png'
+import { PinContainer } from '../components/ui/3d-pin'
+
 
 const MeetTheOwnerSection = () => {
 
@@ -11,8 +14,13 @@ const MeetTheOwnerSection = () => {
 
         <div className="flex flex-col sm:flex-row  justify-center gap-8 lg:gap-16 items-center ">
           {/* Left: profile card */}
-          <div className="flex justify-center md:justify-start">
-            <div className="relative w-80 rounded-2xl p-5 bg-white/5 border border-white/10 shadow-lg">
+          <div className="flex justify-center md:justify-start py-20">
+        
+            <PinContainer
+              title="Alex Vo - LinkedIn"
+              href="https://www.linkedin.com/in/vopromos"
+            >
+             <div className="relative w-80 rounded-2xl p-5 bg-white/5 border border-white/10 shadow-lg">
               {/* image frame */}
               <div className="rounded-xl overflow-hidden bg-gradient-to-br from-transparent to-white/2">
                 <img src={owner} alt="Alex Vo" className="w-full h-80 object-cover rounded-lg" />
@@ -37,9 +45,9 @@ const MeetTheOwnerSection = () => {
                   </svg>
                 </a>
               </div>
-
-
             </div>
+            </PinContainer>
+
           </div>
 
           {/* Right: description */}

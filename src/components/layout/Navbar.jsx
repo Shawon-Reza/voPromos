@@ -34,7 +34,7 @@ export default function Navbar() {
     }
 
     return (
-        <header className="w-full sticky top-0 z-50">
+        <header className="w-full sticky top-0 z-100">
             <div className=" mx-auto flex items-center justify-between px-6 md:px-8 py-4">
                 <a href="#home" onClick={() => handleClick('#home')} className="flex items-center gap-3 no-underline">
                     <figure>
