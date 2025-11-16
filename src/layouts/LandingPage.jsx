@@ -54,7 +54,7 @@ const LandingPage = () => {
       </section>
 
       {/* Freequently asked questions */}
-      <section>
+      <section className="py-12 md:py-20 px-6 md:px-8 lg:px-12 bg-[#F9F9F9]">
         <FrequentlyAskQuestions></FrequentlyAskQuestions>
       </section>
 
