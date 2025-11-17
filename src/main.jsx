@@ -4,10 +4,13 @@ import './index.css'
 import router from './routes/route.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import { ScheduleProvider } from './contextApi/ScheduleContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ToastContainer />
-    <RouterProvider router={router} />
+    <ScheduleProvider>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </ScheduleProvider>
   </StrictMode>,
 )

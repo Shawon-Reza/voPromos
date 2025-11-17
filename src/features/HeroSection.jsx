@@ -1,7 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
-
+    const navigate = useNavigate();
     const bg = 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=60'
 
     return (
@@ -37,12 +38,13 @@ const HeroSection = () => {
                             Initiate a Project
                         </a>
 
-                        <a
-                            href="#contact"
+                        <p
+                          
                             className="inline-block border border-slate-200/30 text-slate-100 hover:text-white px-5 py-3 rounded-md transition"
+                            onClick={() => navigate('/schedule-consultation')}
                         >
                             Schedule A Consultation
-                        </a>
+                        </p>
                     </div>
                 </div>
             </div>
