@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
 
             <ul className="mt-6 space-y-4 xl:text-xl 2xl:text-2xl ">
               <li className="flex gap-3 items-center">
-                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
               </li>
 
               <li className="flex gap-3 items-center">
-                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -53,7 +53,7 @@ const WhyChooseUs = () => {
               </li>
 
               <li className="flex gap-3 items-center">
-                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -63,7 +63,7 @@ const WhyChooseUs = () => {
               </li>
 
               <li className="flex gap-3 items-center">
-                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -77,13 +77,13 @@ const WhyChooseUs = () => {
 
         {/* bottom area: industries list + efficiency card */}
         <div className=" grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center">
-        
+
           <div className='flex  justify-center'>
-           
-            
+
+
             <ul className="mt-4 space-y-3 xl:text-xl 2xl:text-2xl">
 
-               <h4 className="text-slate-900 text-lg xl:text-xl 2xl:text-2xl font-semibold">Industries We Serve</h4>
+              <h4 className="text-slate-900 text-lg xl:text-xl 2xl:text-2xl font-semibold">Industries We Serve</h4>
 
               <li className="flex gap-3 items-center">
                 <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">

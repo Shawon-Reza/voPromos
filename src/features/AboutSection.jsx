@@ -67,7 +67,7 @@ const AboutSection = () => {
                             <ul className="mt-3 space-y-3">
                                 <li className="flex gap-3 items-center">
                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
-                                      <GiCheckMark className="w-3.5 h-3.5" />
+                                        <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Transparency:</strong>
@@ -76,8 +76,8 @@ const AboutSection = () => {
                                 </li>
 
                                 <li className="flex gap-3 items-center">
-                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
-                                      <GiCheckMark className="w-3.5 h-3.5" />
+                                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                        <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Efficiency:</strong>
@@ -87,7 +87,7 @@ const AboutSection = () => {
 
                                 <li className="flex gap-3 items-center">
                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
-                                      <GiCheckMark className="w-3.5 h-3.5" />
+                                        <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Reliability:</strong>
@@ -96,8 +96,8 @@ const AboutSection = () => {
                                 </li>
 
                                 <li className="flex gap-3 items-center">
-                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
-                                      <GiCheckMark className="w-3.5 h-3.5" />
+                                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                        <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Integrity:</strong>
