@@ -6,7 +6,7 @@ import work4 from '../assets/icons/work4.png'
 import work5 from '../assets/icons/work5.png'
 import work6 from '../assets/icons/work6.png'
 import { Marquee } from '../components/ui/marquee'
-
+import { ShineBorder } from '../components/ui/shine-border'
 
 
 const processSteps = [
@@ -97,9 +97,16 @@ const HowItWorkSection = () => {
             const accent = colorMap[s.color] || '#0ea5e9'
             return (
               <div key={s.step} className="shrink-0 w-96 h-48 px-3">
-                <div className="bg-white rounded-xl p-6 h-full shadow-sm flex items-center gap-6">
+                <div className="relative bg-white rounded-xl p-6 h-full shadow-md flex items-center gap-6 overflow-hidden ">
+                  <ShineBorder
+                    className="pointer-events-none rounded-xl"
+                    shineColor={["#152035", "#004E7B", "#152035"]}
+                    size={300}
+                    duration={20}
+                    borderWidth={2}
+                  />
 
-                  <div>
+                  <div className="relative z-10 flex-1">
                     <div style={{ backgroundColor: accent }} className="w-14 h-1.5 rounded mb-3" />
 
                     <div className="flex items-center gap-3">
@@ -108,9 +115,9 @@ const HowItWorkSection = () => {
                     </div>
 
                     <p className="mt-2 text-sm text-[#848484]">{s.description}</p>
-
                   </div>
-                  <img src={s.img} alt={`Step ${s.step} icon`} className="w-20 h-20 rounded-full object-cover" />
+
+                  <img src={s.img} alt={`Step ${s.step} icon`} className="w-20 h-20 rounded-full object-cover z-10" />
                 </div>
               </div>
             )

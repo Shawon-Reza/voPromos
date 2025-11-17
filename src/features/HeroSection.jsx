@@ -8,52 +8,50 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative w-full bg-center bg-cover"
+            className="relative w-full bg-center bg-cover min-h-[calc(100vh-60px)]"
             style={{ backgroundImage: `url(${bg})` }}
         >
             {/* dark overlay */}
             <div className="absolute inset-0 bg-slate-900/70 backdrop-brightness-75"></div>
 
-            <div className="relative  mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 lg:py-36">
-                <div className="text-center mx-auto">
-                    <h2 className="text-[#0E8BD5] text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                        Your Complete Procurement
-                    </h2>
-                    <h1 className="mt-2 text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-                        Partner From Source
-                        <br />
-                        to Storage
-                    </h1>
+            <div className="relative mx-auto px-6 md:px-8 lg:px-12 h-full flex items-center pt-25 md:pt-30 xl:pt-35">
+                    <div className="text-center mx-auto max-w-4xl">
+                        <h2 className="text-[#0E8BD5] text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+                            Your Complete Procurement
+                        </h2>
+                        <h1 className="mt-4 text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+                            Partner From Source
+                            <br />
+                            to Storage
+                        </h1>
 
-                    <p className="mt-6 text-slate-200/85 text-base sm:text-lg md:text-base lg:text-lgmx-auto">
-                        Helping businesses simplify global sourcing, purchasing, and logistics. VoPromos connects you with verified
-                        suppliers, negotiates the best prices, and manages delivery so you focus on growth.
-                    </p>
-
-                    <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center items-center">
-                        <a
-                            href="#services"
-                            className="inline-block bg-[#0E8BD5] hover:bg-sky-600 text-white font-semibold px-5 py-3 rounded-md shadow-md transition"
-                        >
-                            Initiate a Project
-                        </a>
-
-                        <p
-                          
-                            className="inline-block border border-slate-200/30 text-slate-100 hover:text-white px-5 py-3 rounded-md transition cursor-pointer"
-                            onClick={() => navigate('/schedule-consultation')}
-                        >
-                            Schedule A Consultation
+                        <p className="mt-6 text-slate-200/85 text-base sm:text-lg md:text-lg mx-auto max-w-3xl">
+                            Helping businesses simplify global sourcing, purchasing, and logistics. VoPromos connects you with verified
+                            suppliers, negotiates the best prices, and manages delivery so you focus on growth.
                         </p>
+
+                        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center items-center">
+                            <a
+                                href="#services"
+                                className="inline-block bg-[#0E8BD5] hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-md shadow-md transition text-sm sm:text-base"
+                            >
+                                Initiate a Project
+                            </a>
+
+                            <button
+                                className="inline-block border border-slate-200/30 text-slate-100 hover:text-white px-6 py-3 rounded-md transition text-sm sm:text-base cursor-pointer"
+                                onClick={() => navigate('/schedule-consultation')}
+                            >
+                                Schedule A Consultation
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             {/* stats row */}
-            <div className="relative">
-                <div className=" mx-auto px-6 md:px-8 lg:px-12 -mt-6 md:-mt-10">
-                    <div className="bg-gradient-to-b from-slate-900/40 to-transparent backdrop-blur-sm rounded-md overflow-hidden shadow-lg">
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 text-center text-slate-100 py-6">
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[92%] max-w-6xl">
+                <div className="bg-gradient-to-b from-slate-900/40 to-transparent backdrop-blur-sm rounded-md overflow-hidden shadow-lg">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 text-center text-slate-100 py-6">
                             <div className="px-6 border-r border-slate-800/40">
                                 <div className="mb-2 flex items-center justify-center">
                                     <div className="w-10 h-10 rounded-full bg-sky-600/20 flex items-center justify-center">
@@ -104,7 +102,6 @@ const HeroSection = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     )
 }
