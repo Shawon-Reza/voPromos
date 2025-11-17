@@ -1,4 +1,4 @@
-import { RiCalendarScheduleFill } from 'react-icons/ri'
+import { RiCalendarScheduleFill, RiCalendarScheduleLine } from 'react-icons/ri'
 import Navbar from '../components/layout/Navbar'
 import React from 'react'
 import StepperComponent from './StepperComponent'
@@ -10,8 +10,8 @@ const ScheduleConsultation = () => {
                 <Navbar></Navbar>
             </section>
 
-            <div className='flex items-center justify-center pt-28 gap-2 text-3xl font-bold  text-[#004260]'>
-                <RiCalendarScheduleFill size={26} />
+            <div className='flex items-center justify-center pt-28 gap-2 text-3xl xl:text-4xl font-bold  text-[#004260]'>
+                <RiCalendarScheduleLine color='white' size={35} className='p-2 bg-[#0E8BD5] rounded-full' />
                 <h1 className='text-[#004260]'> Schedule a Consultation</h1>
             </div>
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
+import { useSchedule } from "../contextApi/ScheduleContext"
 
 import {
   Stepper,
@@ -22,7 +23,7 @@ export default function StepperComponent() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
 
-  const saveHandlerRef = useRef(() => {})
+  const saveHandlerRef = useRef(() => { })
 
   const handleNextStep = async () => {
     setIsLoading(true)
@@ -40,9 +41,34 @@ export default function StepperComponent() {
       setIsLoading(false)
     }, 250)
   }
+
+  const { scheduleData } = useSchedule()
+
+  const handleConfirmBooking = async () => {
+    setIsLoading(true)
+    try {
+      if (typeof saveHandlerRef.current === 'function') {
+        await Promise.resolve(saveHandlerRef.current())
+      }
+
+      // scheduleData will now contain latest values from steps
+      console.log('Confirming booking with payload:', scheduleData)
+
+      // OPTIONAL: make an API call here
+      // await fetch('/api/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(scheduleData) })
+
+    } catch (err) {
+      console.error('Error during confirm booking:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   console.log(currentStep)
+  const captions = ['Date & Time', 'Your Details', 'Review & Confirm']
+
+
   return (
-    <div className="mx-auto px-5 max-w-2xl md:max-w-3xl lg:max-w-5xl space-y-8 text-center">
+    <div className="mx-auto px-5 max-w-2xl md:max-w-3xl lg:max-w-5xl space-y-8 text-center ">
 
       <div className="mx-auto max-w-xl">
         <Stepper value={currentStep} onValueChange={setCurrentStep}>
@@ -53,9 +79,12 @@ export default function StepperComponent() {
               className="not-last:flex-1"
               loading={isLoading}
             >
-              <StepperTrigger asChild>
-                <StepperIndicator />
-              </StepperTrigger>
+              <div className="flex flex-col items-center">
+                <div className="mb-2 text-sm text-[#3D3D3D] font-semibold text-center">{captions[step - 1]}</div>
+                <StepperTrigger asChild>
+                  <StepperIndicator />
+                </StepperTrigger>
+              </div>
               {step < steps.length && <StepperSeparator />}
             </StepperItem>
           ))}
@@ -65,17 +94,19 @@ export default function StepperComponent() {
 
 
 
-      {currentStep === 1 && <Step1 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
-      {currentStep === 2 && <Step2 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
-      {currentStep === 3 && <Step3 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
+      <div className="md:mt-15 lg:mt-20">
+        {currentStep === 1 && <Step1 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
+        {currentStep === 2 && <Step2 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
+        {currentStep === 3 && <Step3 setSaveHandler={(fn) => (saveHandlerRef.current = fn)} />}
+      </div>
       {/* {currentStep === 4 && <Step4 />} */}
 
 
 
-      <div className="flex justify-center space-x-4">
+      <div className="flex justify-between space-x-4">
         <Button
           variant="outline"
-          className="w-32 cursor-pointer"
+          className="w-32 cursor-pointer  hover:bg-[#0E8BD5] hover:text-white hover:scale-110 transform transition-all ease-in-out duration-700 shadow-2xl border-[#0E8BD5]"
           onClick={() => setCurrentStep((prev) => prev - 1)}
           disabled={currentStep === 1}
         >
@@ -83,14 +114,14 @@ export default function StepperComponent() {
         </Button>
         <Button
           variant="outline"
-          className="w-32 cursor-pointer"
-          onClick={handleNextStep}
+          className="w-32 cursor-pointer bg-[#0E8BD5] text-white hover:bg-[#0E8BD5] hover:text-white hover:scale-110 transform transition-all ease-in-out duration-700 shadow-2xl"
+          onClick={currentStep === steps.length ? handleConfirmBooking : handleNextStep}
           disabled={currentStep > steps.length}
         >
-          Next step
+          {currentStep === steps.length ? 'Confirm booking' : 'Next step'}
         </Button>
       </div>
-      
+
     </div>
   )
 }

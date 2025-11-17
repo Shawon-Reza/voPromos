@@ -145,7 +145,7 @@ function StepperIndicator({
     <span
       data-slot="stepper-indicator"
       className={cn(
-        "relative flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=completed]:bg-primary data-[state=completed]:text-primary-foreground",
+        "relative flex size-8 lg:size-10 shrink-0 items-center justify-center rounded-full  text-xs font-medium text-muted-foreground data-[state=active]:bg-[#0E8BD5] data-[state=active]:text-primary-foreground data-[state=completed]:bg-[#0E8BD5] data-[state=completed]:text-primary-foreground bg-gray-300 ",
         className
       )}
       data-state={state}
@@ -154,6 +154,7 @@ function StepperIndicator({
         children
       ) : (
         <>
+        
           <span
             className="transition-all group-data-loading/step:scale-0 group-data-loading/step:opacity-0 group-data-loading/step:transition-none group-data-[state=completed]/step:scale-0 group-data-[state=completed]/step:opacity-0">
             {step}
@@ -208,9 +209,10 @@ function StepperSeparator({
     <div
       data-slot="stepper-separator"
       className={cn(
-        "m-0.5 bg-gray-400 group-data-[orientation=horizontal]/stepper:h-0.5 group-data-[orientation=horizontal]/stepper:w-full group-data-[orientation=horizontal]/stepper:flex-1 group-data-[orientation=vertical]/stepper:h-12 group-data-[orientation=vertical]/stepper:w-0.5 group-data-[state=completed]/step:bg-primary",
+        "m-0.5 bg-gray-400 group-data-[orientation=horizontal]/stepper:h-0.5 group-data-[orientation=horizontal]/stepper:w-full group-data-[orientation=horizontal]/stepper:flex-1 group-data-[orientation=vertical]/stepper:h-12 group-data-[orientation=vertical]/stepper:w-0.5 group-data-[state=completed]/step:bg-gray-700",
         className
       )}
+      
       {...props} />
   );
 }
