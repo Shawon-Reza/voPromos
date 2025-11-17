@@ -32,8 +32,8 @@ const WhyChooseUs = () => {
             <h2 className="mt-2 text-[#004260] text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-extrabold">Why Choose VoPromos</h2>
 
             <ul className="mt-6 space-y-4 xl:text-xl 2xl:text-2xl ">
-              <li className="flex gap-3 items-start">
-                <span className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
+              <li className="flex gap-3 items-center">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -42,8 +42,8 @@ const WhyChooseUs = () => {
                 </div>
               </li>
 
-              <li className="flex gap-3 items-start">
-                <span className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
+              <li className="flex gap-3 items-center">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -52,8 +52,8 @@ const WhyChooseUs = () => {
                 </div>
               </li>
 
-              <li className="flex gap-3 items-start">
-                <span className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
+              <li className="flex gap-3 items-center">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>
@@ -62,8 +62,8 @@ const WhyChooseUs = () => {
                 </div>
               </li>
 
-              <li className="flex gap-3 items-start">
-                <span className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
+              <li className="flex gap-3 items-center">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-[#152035] to-[#004E7B] text-white">
                   <GiCheckMark className="w-3.5 h-3.5" />
                 </span>
                 <div>

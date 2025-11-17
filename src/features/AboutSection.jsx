@@ -65,9 +65,9 @@ const AboutSection = () => {
                         <div className="mt-6">
                             <h4 className="text-base font-semibold text-[#45556C]">Core Values:</h4>
                             <ul className="mt-3 space-y-3">
-                                <li className="flex items-start gap-3">
-                                    <span className="mt-1 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
-                                      <GiCheckMark />
+                                <li className="flex gap-3 items-center">
+                                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                      <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Transparency:</strong>
@@ -75,9 +75,9 @@ const AboutSection = () => {
                                     </div>
                                 </li>
 
-                                <li className="flex items-start gap-3">
-                                     <span className="mt-1 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
-                                      <GiCheckMark />
+                                <li className="flex gap-3 items-center">
+                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                      <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Efficiency:</strong>
@@ -85,9 +85,9 @@ const AboutSection = () => {
                                     </div>
                                 </li>
 
-                                <li className="flex items-start gap-3">
-                                    <span className="mt-1 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
-                                      <GiCheckMark />
+                                <li className="flex gap-3 items-center">
+                                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                      <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Reliability:</strong>
@@ -95,9 +95,9 @@ const AboutSection = () => {
                                     </div>
                                 </li>
 
-                                <li className="flex items-start gap-3">
-                                     <span className="mt-1 inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white">
-                                      <GiCheckMark />
+                                <li className="flex gap-3 items-center">
+                                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-linear-to-r from-[#152035] to-[#004E7B] text-white flex-shrink-0">
+                                      <GiCheckMark className="w-3.5 h-3.5" />
                                     </span>
                                     <div>
                                         <strong className="text-[#0E8BD5]">Integrity:</strong>
