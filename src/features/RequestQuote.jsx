@@ -41,7 +41,7 @@ export default function RequestQuote() {
   }
 
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 px-4 sm:px-6 lg:px-0 ">
       {/* .................................. */}
       <div
 

@@ -19,22 +19,22 @@ const LandingPage = () => {
       </section>
 
       {/* Here Section .......... */}
-      <section className="mt-16">
+      <section id="home" className="mt-16">
         <HeroSection></HeroSection>
       </section>
 
       {/* About us section..... */}
-      <section className="py-12 md:py-20 px-6 md:px-8 lg:px-12">
+      <section id="about" className="py-12 md:py-20 px-6 md:px-8 lg:px-12">
         <AboutSection></AboutSection>
       </section>
 
       {/* Service Section */}
-      <section className="bg-gradient-to-tr from-[#0f2940] to-[#063f5f] py-6 md:py-12 px-6 md:px-8 lg:px-12">
+      <section id="services" className="bg-linear-to-tr from-[#0f2940] to-[#063f5f] py-6 md:py-12 px-6 md:px-8 lg:px-12">
         <ServiceSection></ServiceSection>
       </section>
 
       {/* Why choose us Section */}
-      <section className=" px-6 md:px-8 lg:px-12">
+      <section id="why" className=" px-6 md:px-8 lg:px-12">
         <WhyChooseUs></WhyChooseUs>
       </section>
 
@@ -44,7 +44,7 @@ const LandingPage = () => {
       </section>
 
       {/* Why its work */}
-      <section>
+      <section id="how">
         <HowItWorkSection></HowItWorkSection>
       </section>
 

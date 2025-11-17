@@ -29,11 +29,42 @@ const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-slate-300 hover:text-white">Home</a></li>
-              <li><a href="#services" className="text-slate-300 hover:text-white">Services</a></li>
-              <li><a href="#how-it-works" className="text-slate-300 hover:text-white">How It Works</a></li>
-              <li><a href="#about" className="text-slate-300 hover:text-white">About Us</a></li>
-              <li><a href="#contact" className="text-slate-300 hover:text-white">Contact</a></li>
+              <li>
+                <a href="#home" onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('home')
+                  const header = document.querySelector('header')
+                  const offset = header ? header.offsetHeight : 80
+                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
+                }} className="text-slate-300 hover:text-white">Home</a>
+              </li>
+              <li>
+                <a href="#services" onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('services')
+                  const header = document.querySelector('header')
+                  const offset = header ? header.offsetHeight : 80
+                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
+                }} className="text-slate-300 hover:text-white">Services</a>
+              </li>
+              <li>
+                <a href="#how" onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('how')
+                  const header = document.querySelector('header')
+                  const offset = header ? header.offsetHeight : 80
+                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
+                }} className="text-slate-300 hover:text-white">How It Works</a>
+              </li>
+              <li>
+                <a href="#about" onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('about')
+                  const header = document.querySelector('header')
+                  const offset = header ? header.offsetHeight : 80
+                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
+                }} className="text-slate-300 hover:text-white">About Us</a>
+              </li>
             </ul>
           </div>
 

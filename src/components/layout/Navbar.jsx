@@ -28,7 +28,21 @@ export default function Navbar() {
         return () => window.removeEventListener('resize', onResize)
     }, [])
 
-    const handleClick = (href) => {
+    const handleClick = (href, e) => {
+        if (e && e.preventDefault) e.preventDefault()
+        // try to find the target element by id (href like '#services')
+        const id = href.replace('#', '')
+        const el = document.getElementById(id)
+        // compute offset from header height to avoid hiding behind fixed navbar
+        const header = document.querySelector('header')
+        const offset = header ? header.offsetHeight : 80
+        if (el) {
+            const top = el.getBoundingClientRect().top + window.scrollY - offset
+            window.scrollTo({ top, behavior: 'smooth' })
+        } else {
+            // fallback to default hash navigation
+            window.location.hash = href
+        }
         setActive(href)
         setOpen(false)
     }
@@ -52,7 +66,7 @@ export default function Navbar() {
                         <a
                             key={l.href}
                             href={l.href}
-                            onClick={() => handleClick(l.href)}
+                            onClick={(e) => handleClick(l.href, e)}
                             className={`text-slate-200/90 text-lg relative py-1 transition-colors duration-150 ${active === l.href ? 'text-white border-b-2 border-sky-400 pb-1' : 'hover:text-white'
                                 }`}
                         >
