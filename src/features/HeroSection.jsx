@@ -40,7 +40,7 @@ const HeroSection = () => {
 
                         <p
                           
-                            className="inline-block border border-slate-200/30 text-slate-100 hover:text-white px-5 py-3 rounded-md transition"
+                            className="inline-block border border-slate-200/30 text-slate-100 hover:text-white px-5 py-3 rounded-md transition cursor-pointer"
                             onClick={() => navigate('/schedule-consultation')}
                         >
                             Schedule A Consultation

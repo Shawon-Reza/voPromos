@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import logo from '../../assets/icons/logo.png'
 import logoTitle from '../../assets/icons/logoTitle.png'
 
@@ -11,6 +12,8 @@ const LINKS = [
 ]
 
 export default function Navbar() {
+    const navigate = useNavigate()
+    const location = useLocation()
     const [open, setOpen] = useState(false)
     const [active, setActive] = useState(typeof window !== 'undefined' ? (window.location.hash || '#home') : '#home')
 
@@ -30,8 +33,17 @@ export default function Navbar() {
 
     const handleClick = (href, e) => {
         if (e && e.preventDefault) e.preventDefault()
-        // try to find the target element by id (href like '#services')
+        // try to find the target element id (href like '#services')
         const id = href.replace('#', '')
+
+        // If we're not on the landing page, navigate there and pass state telling it which section to scroll to
+        if (location.pathname !== '/') {
+            navigate('/', { state: { scrollTo: id } })
+            setActive(href)
+            setOpen(false)
+            return
+        }
+
         const el = document.getElementById(id)
         // compute offset from header height to avoid hiding behind fixed navbar
         const header = document.querySelector('header')

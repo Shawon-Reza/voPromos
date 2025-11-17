@@ -1,12 +1,13 @@
 import React from 'react'
 import logo from '../../assets/icons/logo.png'
 import logoTitle from '../../assets/icons/logoTitle.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { IoLocation } from "react-icons/io5";
 import { MdLocalPhone, MdOutlineMail } from 'react-icons/md';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   return (
@@ -32,7 +33,9 @@ const Footer = () => {
               <li>
                 <a href="#home" onClick={(e) => {
                   e.preventDefault();
-                  const el = document.getElementById('home')
+                  const id = 'home'
+                  if (location.pathname !== '/') return navigate('/', { state: { scrollTo: id } })
+                  const el = document.getElementById(id)
                   const header = document.querySelector('header')
                   const offset = header ? header.offsetHeight : 80
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
@@ -41,7 +44,9 @@ const Footer = () => {
               <li>
                 <a href="#services" onClick={(e) => {
                   e.preventDefault();
-                  const el = document.getElementById('services')
+                  const id = 'services'
+                  if (location.pathname !== '/') return navigate('/', { state: { scrollTo: id } })
+                  const el = document.getElementById(id)
                   const header = document.querySelector('header')
                   const offset = header ? header.offsetHeight : 80
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
@@ -50,7 +55,9 @@ const Footer = () => {
               <li>
                 <a href="#how" onClick={(e) => {
                   e.preventDefault();
-                  const el = document.getElementById('how')
+                  const id = 'how'
+                  if (location.pathname !== '/') return navigate('/', { state: { scrollTo: id } })
+                  const el = document.getElementById(id)
                   const header = document.querySelector('header')
                   const offset = header ? header.offsetHeight : 80
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
@@ -59,7 +66,9 @@ const Footer = () => {
               <li>
                 <a href="#about" onClick={(e) => {
                   e.preventDefault();
-                  const el = document.getElementById('about')
+                  const id = 'about'
+                  if (location.pathname !== '/') return navigate('/', { state: { scrollTo: id } })
+                  const el = document.getElementById(id)
                   const header = document.querySelector('header')
                   const offset = header ? header.offsetHeight : 80
                   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
