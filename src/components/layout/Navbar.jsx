@@ -50,7 +50,7 @@ export default function Navbar() {
     return (
         <header className="w-full sticky top-0 z-100">
             <div className=" mx-auto flex items-center justify-between px-6 md:px-8 py-4">
-                <a href="#home" onClick={() => handleClick('#home')} className="flex items-center gap-3 no-underline">
+                <a href="#home" onClick={(e) => handleClick('#home', e)} className="flex items-center gap-3 no-underline">
                     <figure>
                         <img src={logo} alt="logo" />
                     </figure>
@@ -98,7 +98,7 @@ export default function Navbar() {
                             <a
                                 key={l.href}
                                 href={l.href}
-                                onClick={() => handleClick(l.href)}
+                                onClick={(e) => handleClick(l.href, e)}
                                 className={`block text-slate-200/90 py-3 text-base ${active === l.href ? 'text-white' : 'hover:text-white'}`}
                             >
                                 {l.label}
