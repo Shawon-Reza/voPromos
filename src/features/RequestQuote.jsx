@@ -6,6 +6,7 @@ import { FaInstagramSquare } from "react-icons/fa"
 import { BsTwitterX } from "react-icons/bs"
 import { RiSendPlaneFill } from "react-icons/ri"
 import Requestbg from '../assets/icons/Requestbg.png'
+import SplitText from '../components/SplitText'
 
 export default function RequestQuote() {
   const [form, setForm] = useState({
@@ -38,7 +39,7 @@ export default function RequestQuote() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     console.log(form)
     const formData = new FormData()
     Object.entries(form).forEach(([key, value]) => {
@@ -112,7 +113,22 @@ export default function RequestQuote() {
 
           {/* Right: Quote Form */}
           <form onSubmit={handleSubmit} className="p-8 lg:p-10">
-            <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#004260]">Request a Quote</h3>
+
+            <SplitText
+              text="Request a Quote"
+              className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#004260]"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+
+            {/* <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#004260]">Request a Quote</h3> */}
 
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField name="firstName" label="First Name" value={form.firstName} onChange={handleChange} />

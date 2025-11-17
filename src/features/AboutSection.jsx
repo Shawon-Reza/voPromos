@@ -4,6 +4,7 @@ import about2 from '../assets/icons/about2.png'
 import overlapimg from '../assets/icons/overlapimg.png'
 import Rectangle from '../assets/icons/Rectangle.png'
 import { GiCheckMark } from 'react-icons/gi'
+import SplitText from '../components/SplitText'
 
 const AboutSection = () => {
 
@@ -49,7 +50,21 @@ const AboutSection = () => {
                     {/* right content */}
                     <div>
                         <p className="text-md text-[#092846] font-bold">About Us</p>
-                        <h2 className="mt-3 text-3xl md:text-4xl font-extrabold text-[#004260]">Who We are</h2>
+                        <SplitText
+                        text="Who We are"
+                        className="mt-3 text-3xl md:text-4xl font-extrabold text-[#004260]"
+                        delay={100}
+                        duration={0.6}
+                        ease="power3.out"
+                        splitType="chars"
+                        from={{ opacity: 0, y: 40 }}
+                        to={{ opacity: 1, y: 0 }}
+                        threshold={0.1}
+                        rootMargin="-100px"
+                        textAlign="center"
+
+                    />
+                        {/* <h2 className="mt-3 text-3xl md:text-4xl font-extrabold text-[#004260]">Who We are</h2> */}
 
                         <p className="mt-4 text-[#45556C] ">
                             VoPromos LLC is a procurement and consulting firm specializing in sourcing, purchasing, delivery, and

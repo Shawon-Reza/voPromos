@@ -2,6 +2,7 @@ import React from 'react'
 import owner from '../assets/icons/owner.png'
 import meetoverlap from '../assets/icons/meetoverlap.png'
 import { PinContainer } from '../components/ui/3d-pin'
+import SplitText from '../components/SplitText'
 
 
 const MeetTheOwnerSection = () => {
@@ -52,7 +53,22 @@ const MeetTheOwnerSection = () => {
 
           {/* Right: description */}
           <div className="prose prose-invert max-w-none text-slate-100">
-            <h2 className="text-start text-3xl md:text-4xl font-extrabold mb-8">Meet the Owner</h2>
+
+              <SplitText
+              text="Meet the Owner"
+              className="text-start text-3xl md:text-4xl font-extrabold mb-8"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+
+            />
+            {/* <h2 className="text-start text-3xl md:text-4xl font-extrabold mb-8">Meet the Owner</h2> */}
 
             <p className="text-base md:text-lg">Hi, I'm Alex Vo, founder of VoPromos LLC. I started this company because I've seen firsthand how frustrating and time-consuming sourcing and logistics can be for growing businesses. Finding the right supplier, getting fair pricing, and making sure products arrive on time shouldn't feel like a guessing game — and that's where I come in.</p>
 

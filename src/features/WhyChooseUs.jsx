@@ -3,6 +3,7 @@ import choose1 from '../assets/icons/choose1.png'
 import choose2 from '../assets/icons/choose2.png'
 import dotsbg from '../assets/icons/dotsbg.png'
 import { GiCheckMark } from 'react-icons/gi'
+import SplitText from '../components/SplitText'
 
 const WhyChooseUs = () => {
 
@@ -21,15 +22,46 @@ const WhyChooseUs = () => {
               <img
                 src={choose1}
                 alt="Why Choose Us"
-                className="max-h-[300px] md:max-h-[400px] xl:max-h-[350px] 2xl:max-h-[420px]"
+                className="max-h-[300px] md:max-h-[400px] xl:max-h-[350px] 2xl:max-h-[420px] hover:scale-103 transition-transform duration-500"
               />
             </figure>
           </div>
 
           {/* Right column - heading and bullets */}
           <div>
+            <SplitText
+              text="Why choose us"
+              className="text-md xl:text-lg 2xl:text-xl  font-semibold text-[#004260]"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+
+            />
+            <br />
+            <SplitText
+              text="Why Choose VoPromos"
+              className="mt-2 text-[#004260] text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-extrabold"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+
+            />
+
+            {/* 
             <p className="text-md xl:text-lg 2xl:text-xl  font-semibold text-[#004260]">Why choose us</p>
-            <h2 className="mt-2 text-[#004260] text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-extrabold">Why Choose VoPromos</h2>
+            <h2 className="mt-2 text-[#004260] text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-extrabold">Why Choose VoPromos</h2> */}
 
             <ul className="mt-6 space-y-4 xl:text-xl 2xl:text-2xl ">
               <li className="flex gap-3 items-center">
@@ -123,7 +155,7 @@ const WhyChooseUs = () => {
               <img
                 src={choose2}
                 alt="Why Choose Us"
-                className='max-h-[300px] md:max-h-[400px] xl:max-h-[350px] 2xl:max-h-[420px]'
+                className='max-h-[300px] md:max-h-[400px] xl:max-h-[350px] 2xl:max-h-[420px] hover:scale-103 transition-transform duration-500 '
               />
             </figure>
           </div>

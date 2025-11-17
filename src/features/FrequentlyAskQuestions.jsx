@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import faqimg from '../assets/icons/faqimg.png'
+import SplitText from '../components/SplitText'
 
 const faqs = [
   {
@@ -47,7 +48,21 @@ export default function FrequentlyAskQuestions() {
 
         {/* Right: FAQ accordion */}
         <div className="order-1 lg:order-2 col-span-6 md:col-span-6 lg:col-span-7 xl:col-span-8">
-          <h2 className="text-3xl xl:text-4xl font-extrabold text-[#004260]">Frequently Asked Questions</h2>
+          <SplitText
+            text="Frequently Asked Questions"
+            className="text-3xl xl:text-4xl font-extrabold text-[#004260]"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+          />
+
+          {/* <h2 className="text-3xl xl:text-4xl font-extrabold text-[#004260]">Frequently Asked Questions</h2> */}
           <p className="mt-3 text-[#45556C]">We understand that choosing the right sourcing and logistics partner is an important decision — here are answers to common questions.</p>
 
           <div className="mt-6 space-y-4">
