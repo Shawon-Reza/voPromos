@@ -38,7 +38,7 @@ export default function TextReveal({ textToAnimate }) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }}
-        className="text-lg font-semibold text-center mask-r-from-0.5  "
+        className="text-lg font-semibold text-center mask-r-from-  "
         >
         {words.map((word, index) => (
           <motion.span

@@ -3,7 +3,7 @@ import { MdOutlineCall, MdOutlineMailOutline } from 'react-icons/md'
 import { CiLocationOn } from "react-icons/ci"
 import { FaBusinessTime, FaSquareFacebook } from "react-icons/fa6"
 import { FaInstagramSquare } from "react-icons/fa"
-import { BsTwitterX } from "react-icons/bs"
+import { BsTiktok, BsTwitterX } from "react-icons/bs"
 import { RiSendPlaneFill } from "react-icons/ri"
 import Requestbg from '../assets/icons/Requestbg.png'
 import SplitText from '../components/SplitText'
@@ -107,6 +107,7 @@ export default function RequestQuote() {
                 <SocialIcon href="https://www.facebook.com/Vopromos" icon={<FaSquareFacebook size={24} />} />
                 <SocialIcon href="https://www.instagram.com/vopromos" icon={<FaInstagramSquare size={24} />} />
                 <SocialIcon href="https://x.com/vopromos" icon={<BsTwitterX size={24} />} />
+                <SocialIcon href="https://www.tiktok.com/@vopromos" icon={<BsTiktok size={24} />} />
               </div>
             </div>
           </div>

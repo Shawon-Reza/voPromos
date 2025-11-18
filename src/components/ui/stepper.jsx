@@ -86,6 +86,7 @@ function StepperItem({
   return (
     <StepItemContext.Provider value={{ step, state, isDisabled: disabled, isLoading }}>
       <div
+      
         data-slot="stepper-item"
         className={cn(
           "group/step flex items-center group-data-[orientation=horizontal]/stepper:flex-row group-data-[orientation=vertical]/stepper:flex-col",
