@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useRef } from "react"
 import { useSchedule } from "../contextApi/ScheduleContext"
+import { useNavigate } from 'react-router-dom'
+import SuccessPage from './SuccessPage'
 
 import {
   Stepper,
@@ -14,7 +16,7 @@ import { Button } from "../components/ui/button"
 import Step1 from "./stepperComponents.jsx/Step1"
 import Step2 from "./stepperComponents.jsx/Step2"
 import Step3 from "./stepperComponents.jsx/Step3"
-import Step4 from "./stepperComponents.jsx/Step4"
+
 
 const steps = [1, 2, 3]
 
@@ -54,17 +56,43 @@ export default function StepperComponent() {
       // scheduleData will now contain latest values from steps
       console.log('Confirming booking with payload:', scheduleData)
 
-      // OPTIONAL: make an API call here
-      // await fetch('/api/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(scheduleData) })
+      // Make the API call to create booking
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(scheduleData),
+      })
+
+      if (!res.ok) {
+        const errText = await res.text().catch(() => 'Request failed')
+        throw new Error(errText || 'Booking request failed')
+      }
+
+      // on success, show modal with booking data
+      setBookingPayload(scheduleData)
+      setShowSuccessModal(true)
 
     } catch (err) {
       console.error('Error during confirm booking:', err)
+      setBookingPayload(scheduleData)
+
+      setShowSuccessModal(true)
     } finally {
       setIsLoading(false)
     }
   }
   console.log(currentStep)
   const captions = ['Date & Time', 'Your Details', 'Review & Confirm']
+
+  const navigate = useNavigate()
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [bookingPayload, setBookingPayload] = useState(null)
+
+  const handleSuccessClose = () => {
+    setShowSuccessModal(false)
+    // redirect to home after closing modal
+    // navigate('/')
+  }
 
 
   return (
@@ -121,6 +149,16 @@ export default function StepperComponent() {
           {currentStep === steps.length ? 'Confirm booking' : 'Next step'}
         </Button>
       </div>
+
+      {/* Success modal overlay */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-9998 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/40" onClick={handleSuccessClose} />
+          <div className="relative z-50 w-full max-w-2xl p-6">
+            <SuccessPage booking={bookingPayload} onClose={handleSuccessClose} />
+          </div>
+        </div>
+      )}
 
     </div>
   )

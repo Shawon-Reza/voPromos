@@ -26,8 +26,8 @@ const Footer = () => {
 
 
   return (
-    <footer className="bg-[#092848] text-slate-200">
-      <div className="px-6 md:px-12 lg:px-20 py-10">
+    <footer className="bg-[#092848] text-slate-200 md:-mt-5  lg:-mt-7  xl:-mt-10">
+      <div className="py-10 px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left: logo + tagline */}
           <div className="space-y-4">
