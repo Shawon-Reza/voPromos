@@ -9,6 +9,21 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const goToHome = () => {
+    const id = 'home';
+    if (location.pathname !== '/') {
+      return navigate('/', { state: { scrollTo: id } });
+    }
+    const el = document.getElementById(id);
+    const header = document.querySelector('header');
+    const offset = header ? header.offsetHeight : 80;
+    if (el) {
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
 
   return (
     <footer className="bg-[#092848] text-slate-200">
@@ -17,8 +32,7 @@ const Footer = () => {
           {/* Left: logo + tagline */}
           <div className="space-y-4">
             <div
-              onClick={() => navigate('/')}
-
+              onClick={goToHome}
               className="flex items-center gap-3 cursor-pointer">
               <img src={logo} alt="VoPromos Logo" className="h-10" />
               <img src={logoTitle} alt="VoPromos Logo" className="h-5" />

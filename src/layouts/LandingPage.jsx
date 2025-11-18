@@ -66,7 +66,7 @@ const LandingPage = () => {
       </motion.section>
 
       {/* Meet The owner */}
-      <motion.section className="py-8" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.12 }} variants={fadeInUp}>
+      <motion.section className="py-8 -mt-7" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.12 }} variants={fadeInUp}>
         <MeetTheOwnerSection />
       </motion.section>
 
@@ -76,7 +76,7 @@ const LandingPage = () => {
       </motion.section>
 
       {/* Request a quote */}
-      <motion.section className="py-10" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.12 }} variants={fadeInUp}>
+      <motion.section className="py-10 -my-15" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.12 }} variants={fadeInUp}>
         <RequestQuote />
       </motion.section>
 

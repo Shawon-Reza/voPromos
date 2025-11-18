@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const HeroSection = () => {
     const navigate = useNavigate();
     const bg = 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=60'
+    
     const textToAnimate = "Helping businesses simplify global sourcing, purchasing, and logistics. VoPromos connects you with verified suppliers, negotiates the best prices, and manages delivery so you focus on growth."
 
     // Use a mount-driven key so the TextReveal component remounts
