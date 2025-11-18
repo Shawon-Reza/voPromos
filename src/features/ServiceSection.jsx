@@ -1,6 +1,5 @@
-import React from "react";
-import { Marquee } from "../components/ui/marquee.jsx";
-import { MdOutlineArrowOutward } from "react-icons/md";
+import React, { useRef, useState, useEffect } from "react";
+import { MdOutlineArrowOutward, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import service1 from '../assets/icons/service1.png'
 import service2 from '../assets/icons/service2.png'
 import service3 from '../assets/icons/service3.png'
@@ -56,7 +55,7 @@ const services = [
 // single row marquee — repeat children to create continuous scroll
 
 const ServiceCard = ({ image, title, description }) => (
-  <article className="w-72 md:w-80 shrink-0 rounded-xl overflow-hidden bg-white/5 border border-white/10 p-4 shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-700">
+  <article className="w-72 md:w-80 shrink-0 rounded-xl overflow-hidden bg-white/5 hover:bg-linear-to-b from-[#0E8BD5] to-[#5C5C5C] transform  border border-white/10 p-4 shadow-lg flex flex-col hover:scale-[1.03] transition-all duration-700">
     <div className="mb-3">
       <div className="flex justify-between items-start">
         <h4 className="text-white text-lg font-semibold">{title}</h4>
@@ -75,8 +74,51 @@ const ServiceCard = ({ image, title, description }) => (
 );
 
 const ServiceSection = () => {
+  const scrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 8);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 8);
+  };
+
+  useEffect(() => {
+    updateScrollState();
+    const handleResize = () => {
+      updateScrollState();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const scrollByDirection = (dir = "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const step = Math.floor(el.clientWidth * 0.8);
+    const left = dir === "left" ? -step : step;
+    el.scrollBy({ left, behavior: "smooth" });
+    // schedule update after scroll
+    setTimeout(updateScrollState, 300);
+  };
+
+  const onScroll = () => updateScrollState();
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      scrollByDirection("right");
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      scrollByDirection("left");
+    }
+  };
+
   return (
-    <section className="relative w-full flex flex-col items-center justify-center overflow-hidden rounded-2xl py-8 ">
+    <section className="relative w-full flex flex-col items-center justify-center overflow-visible rounded-2xl py-8 ">
 
       <div className="w-full  ">
         <div className="mb-6 px-4 md:px-6 lg:px-8">
@@ -87,18 +129,47 @@ const ServiceSection = () => {
           </p>
         </div>
 
-        <div>
-          <Marquee pauseOnHover repeat={3} className="[--duration:20s]">
-            {services.map((s) => (
-              <ServiceCard key={s.title} {...s} />
-            ))}
-          </Marquee>
+        <div className="relative">
+          <div className="overflow-hidden">
+            <div
+              ref={scrollRef}
+              tabIndex={0}
+              onKeyDown={handleKeyDown}
+              onScroll={onScroll}
+              className="flex gap-4 px-4 md:px-6 lg:px-8 overflow-x-auto scrollbar-hide scroll-smooth touch-pan-x py-4"
+              aria-label="Services carousel"
+            >
+              {services.map((s) => (
+                <ServiceCard key={s.title} {...s} />
+              ))}
+            </div>
+          </div>
+
+          {/* Left / Right controls moved to section root for global positioning */}
         </div>
       </div>
 
       {/* subtle edge gradients */}
       {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-linear-to-r from-white/8 to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-linear-to-l from-white/8 to-transparent" /> */}
+      {/* buttons positioned relative to the section root */}
+      <button
+        onClick={() => scrollByDirection("left")}
+        disabled={!canScrollLeft}
+        aria-label="Scroll left"
+        className={`absolute -left-4 md:-left-6 top-[60%] -translate-y-1/2 z-30 p-3 cursor-pointer rounded-full bg-black/50 hover:bg-black/60 transition-opacity ${canScrollLeft ? "opacity-100" : "opacity-40 cursor-not-allowed"}`}
+      >
+        <MdChevronLeft size={22} color="white" />
+      </button>
+
+      <button
+        onClick={() => scrollByDirection("right")}
+        disabled={!canScrollRight}
+        aria-label="Scroll right"
+        className={`absolute -right-4 md:-right-6 top-[60%] -translate-y-1/2 z-30 p-3 cursor-pointer rounded-full bg-black/50 hover:bg-black/60 transition-opacity ${canScrollRight ? "opacity-100" : "opacity-40 cursor-not-allowed"}`}
+      >
+        <MdChevronRight size={22} color="white" />
+      </button>
     </section>
   );
 };

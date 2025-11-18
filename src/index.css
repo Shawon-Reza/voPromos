@@ -180,4 +180,12 @@
   .animate-shine {
     animation: shine var(--duration, 14s) linear infinite;
   }
+  /* Hide native scrollbars while preserving scroll functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }
