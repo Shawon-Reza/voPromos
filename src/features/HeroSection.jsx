@@ -20,7 +20,7 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative w-full bg-center bg-cover min-h-[calc(100vh-60px)]"
+            className="relative w-full bg-center bg-cover min-h-[calc(100vh-60px)] pb-5 sm:pb-0 "
             style={{ backgroundImage: `url(${bg})` }}
         >
             {/* dark overlay */}
@@ -67,7 +67,7 @@ const HeroSection = () => {
                         to Storage
                     </h1> */}
 
-                    <div className="mt-6 text-slate-200/85 text-base sm:text-lg md:text-lg mx-auto max-w-3xl">
+                    <div className="sm:mt-6 text-slate-200/85 text-base sm:text-lg md:text-lg mx-auto max-w-3xl">
                         {revealKey && (
                             <TextReveal key={revealKey} textToAnimate={textToAnimate} />
                         )}
