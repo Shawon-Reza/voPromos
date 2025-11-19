@@ -95,7 +95,7 @@ const HeroSection = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[92%] max-w-6xl">
                 <div className="bg-gradient-to-b from-slate-900/40 to-transparent backdrop-blur-sm rounded-md overflow-hidden shadow-lg">
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 text-center text-slate-100 py-4 sm:py-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 text-center text-slate-100 py-4 sm:py-6 hidden sm:flex">
                         
                         <div className="px-6 border-r border-slate-800/40">
                             <div className="mb-2 flex items-center justify-center">
