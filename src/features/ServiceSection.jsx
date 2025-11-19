@@ -68,7 +68,7 @@ const ServiceCard = ({ image, title, description }) => (
 
     {/* image always placed at the end of the card */}
     <figure className="mt-auto rounded-md overflow-hidden bg-slate-800">
-      <img src={image} alt={title} className="w-full h-36 object-cover grayscale" />
+      <img src={image} alt={title} className="w-full h-36 object-cover grayscale hover:grayscale-0 transition-all duration-300" />
     </figure>
   </article>
 );
