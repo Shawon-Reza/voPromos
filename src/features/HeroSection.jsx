@@ -95,12 +95,12 @@ const HeroSection = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[92%] max-w-6xl">
                 <div className="bg-gradient-to-b from-slate-900/40 to-transparent backdrop-blur-sm rounded-md overflow-hidden shadow-lg">
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 text-center text-slate-100 py-4 sm:py-6 hidden sm:flex">
-                        
-                        <div className="px-6 border-r border-slate-800/40">
+                    <div className="flex gap-4 px-4 overflow-x-auto scrollbar-hide py-4 sm:py-6 sm:grid sm:grid-cols-4 sm:gap-0 sm:overflow-visible sm:px-0 text-center text-slate-100">
+
+                        <div className="flex-shrink-0 w-64 sm:w-auto sm:px-6 sm:border-r sm:border-slate-800/40 sm:last:border-0 text-center">
                             <div className="mb-2 flex items-center justify-center">
                                 <div className="w-10 h-10 rounded-full bg-sky-600/20 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h- w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
                                     </svg>
                                 </div>
@@ -109,7 +109,7 @@ const HeroSection = () => {
                             <div className="text-sm text-slate-300 mt-1">Vetted Suppliers</div>
                         </div>
 
-                        <div className="px-6 border-r border-slate-800/40">
+                        <div className="flex-shrink-0 w-64 sm:w-auto sm:px-6 sm:border-r sm:border-slate-800/40 sm:last:border-0 text-center">
                             <div className="mb-2 flex items-center justify-center">
                                 <div className="w-10 h-10 rounded-full bg-sky-600/20 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +121,7 @@ const HeroSection = () => {
                             <div className="text-sm text-slate-300 mt-1">Industries Served</div>
                         </div>
 
-                        <div className="px-6 border-r border-slate-800/40">
+                        <div className="flex-shrink-0 w-64 sm:w-auto sm:px-6 sm:border-r sm:border-slate-800/40 sm:last:border-0 text-center">
                             <div className="mb-2 flex items-center justify-center">
                                 <div className="w-10 h-10 rounded-full bg-sky-600/20 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,7 +133,7 @@ const HeroSection = () => {
                             <div className="text-sm text-slate-300 mt-1">Successful Shipments</div>
                         </div>
 
-                        <div className="px-6">
+                        <div className="flex-shrink-0 w-64 sm:w-auto sm:px-6 text-center">
                             <div className="mb-2 flex items-center justify-center">
                                 <div className="w-10 h-10 rounded-full bg-sky-600/20 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
