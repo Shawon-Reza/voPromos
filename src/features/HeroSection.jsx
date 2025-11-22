@@ -20,13 +20,13 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative w-full bg-center bg-cover min-h-[calc(100vh-60px)] pb-5 sm:pb-0 "
+            className="relative w-full bg-center bg-cover min-h-[calc(100vh-60px)] pb-5 sm:pb-0 flex flex-col justify-between"
             style={{ backgroundImage: `url(${bg})` }}
         >
             {/* dark overlay */}
             <div className="absolute inset-0 bg-slate-900/70 backdrop-brightness-75"></div>
 
-            <div className="relative mx-auto px-6 md:px-8 lg:px-12 h-full flex items-center pt-10 sm:pt-32 md:pt-30 xl:pt-32">
+            <div className="relative mx-auto px-6 md:px-8 lg:px-12 flex-1 flex items-center pt-10 sm:pt-32 md:pt-30 xl:pt-32">
                 <div className="text-center mx-auto max-w-4xl">
                     <h2 className="text-[#0E8BD5] text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
                         Your Complete Procurement
@@ -91,8 +91,10 @@ const HeroSection = () => {
                 </div>
             </div>
 
+            {/* absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[92%]  */}
             {/* stats row */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[92%] max-w-6xl">
+
+            <div className="max-w-6xl mx-auto flex flex-col justify-end">
                 <div className="bg-gradient-to-b from-slate-900/40 to-transparent backdrop-blur-sm rounded-md overflow-hidden shadow-lg">
 
                     <div className="flex gap-4 px-4 overflow-x-auto scrollbar-hide py-4 sm:py-6 sm:grid sm:grid-cols-4 sm:gap-0 sm:overflow-visible sm:px-0 text-center text-slate-100 hidden sm:flex">

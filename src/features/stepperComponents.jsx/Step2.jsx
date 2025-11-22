@@ -3,10 +3,12 @@ import { useSchedule } from '../../contextApi/ScheduleContext'
 
 
 const services = [
-    'General Consultation',
-    'Voiceover Recording',
-    'Audio Editing',
-    'Localization',
+    'Product Sourcing',
+    'Supplier Management',
+    'Price Negotiation & Contracting',
+    'Shipping & Logistics',
+    'Warehousing & Storage',
+    'Consulting & Procurement Strategy',
 ]
 
 const Step2 = ({ onChange, setSaveHandler } = {}) => {

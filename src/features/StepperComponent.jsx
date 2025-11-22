@@ -16,6 +16,7 @@ import { Button } from "../components/ui/button"
 import Step1 from "./stepperComponents.jsx/Step1"
 import Step2 from "./stepperComponents.jsx/Step2"
 import Step3 from "./stepperComponents.jsx/Step3"
+import { toast } from "react-toastify"
 
 
 const steps = [1, 2, 3]
@@ -67,7 +68,7 @@ export default function StepperComponent() {
 
       if (missing.length > 0) {
         const pretty = missing.join(', ')
-        alert(`Please fill the following required fields before confirming: ${pretty}`)
+        toast.warning(`Please fill the following required fields before confirming: ${pretty}`)
         setIsLoading(false)
         return
       }

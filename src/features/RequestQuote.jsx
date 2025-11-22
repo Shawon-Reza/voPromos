@@ -9,6 +9,7 @@ import { BsTiktok, BsTwitterX } from "react-icons/bs"
 import { RiSendPlaneFill } from "react-icons/ri"
 import Requestbg from '../assets/icons/Requestbg.png'
 import SplitText from '../components/SplitText'
+import { toast } from 'react-toastify'
 
 export default function RequestQuote() {
   const [form, setForm] = useState({
@@ -43,7 +44,7 @@ export default function RequestQuote() {
     const images = list.filter((f) => f && f.type && f.type.startsWith('image/'))
     const rejectedCount = list.length - images.length
     if (rejectedCount > 0) {
-      alert(`Only image files are allowed. ${rejectedCount} file(s) were ignored.`)
+      toast.warning(`Only image files are allowed. ${rejectedCount} file(s) were ignored.`)
     }
 
     if (images.length) {
@@ -62,7 +63,7 @@ export default function RequestQuote() {
     const required = ['firstName', 'email', 'service']
     const missing = required.filter((k) => !form[k])
     if (missing.length > 0) {
-      alert(`Please fill required fields: ${missing.join(', ')}`)
+      toast.warning(`Please fill required fields: ${missing.join(', ')}`)
       setIsLoading(false)
       return
     }
@@ -84,7 +85,7 @@ export default function RequestQuote() {
           const uploadJson = await uploadRes.json()
           if (!uploadRes.ok || !uploadJson.secure_url) {
             console.error('Cloudinary upload error:', uploadJson)
-            alert(`File upload failed for ${f.name}. Please try again.`)
+            toast.error(`File upload failed for ${f.name}. Please try again.`)
             setIsLoading(false)
             return
           }
@@ -129,14 +130,14 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
 
       if (!emailRes.ok || !json.success) {
         console.error('Web3Forms error', json)
-        alert('Failed to send email. Please try again later.')
+        toast.error('Failed to send email. Please try again later.')
         setIsLoading(false)
         return
       }
 
       // Success: preserve payload, reset form/files, show success alert + modal
       const payload = { ...form }
-      alert('Request submitted successfully!')
+      toast.success('Request submitted successfully!')
       // reset form and files immediately
       setForm({
         firstName: '',
@@ -156,7 +157,7 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
       setShowSuccessModal(true)
       } catch (err) {
         console.error('Submit error:', err)
-        alert('Something went wrong.')
+        toast.info('Something went wrong.')
       } finally {
         setIsLoading(false)
       }
@@ -254,7 +255,7 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
               <InputField name="phone" label="Phone Number" value={form.phone} onChange={handleChange} />
               <InputField name="company" label="Company Name" value={form.company} onChange={handleChange} />
 
-              <SelectField name="service" label="Service Needed" value={form.service} onChange={handleChange} options={["Product Sourcing", "Supplier Vetting", "Logistics & Shipping", "Custom Packaging"]} />
+              <SelectField name="service" label="Service Needed" value={form.service} onChange={handleChange} options={["Product Sourcing", "Supplier Management","Price Negotiation & Contracting", "Shipping & Logistics", "Warehousing & Storage","Consulting & Procurement Strategy"]} />
               <InputField name="budget" label="Budget Range $" value={form.budget} onChange={handleChange} />
               <SelectField name="timeline" label="Timeline" value={form.timeline} onChange={handleChange} options={["1-3 months", "3-6 months", "6+ months"]} />
             </div>
