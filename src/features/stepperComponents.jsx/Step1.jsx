@@ -20,6 +20,15 @@ const Step1 = ({ onChange, setSaveHandler } = {}) => {
         if (selectedDay && typeof updateSchedule === 'function') updateSchedule('selectedDay', selectedDay)
     }, [selectedDay, updateSchedule])
 
+    // initialize local form state from context when available
+    useEffect(() => {
+        if (!scheduleData) return
+
+        if (scheduleData.preferredDate) setPreferredDate(scheduleData.preferredDate)
+        if (scheduleData.preferredTime) setPreferredTime(scheduleData.preferredTime)
+        if (scheduleData.selectedDay) setSelectedDay(scheduleData.selectedDay)
+    }, [scheduleData])
+
 
 
 

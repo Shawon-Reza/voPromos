@@ -48,7 +48,7 @@ const SuccessPage = ({ booking: propBooking, onClose }) => {
                 </p>
 
                 <p className="mt-3 text-sm text-sky-600">
-                    We'll send a confirmation email to <span className="font-medium">{email}</span>
+                    We'll send a confirmation email to <span className="font-medium">{email}.Our team will reach out soon to discuss your sourcing and logistics needs.</span>
                 </p>
 
                 <div className="mt-6 w-full max-w-md">

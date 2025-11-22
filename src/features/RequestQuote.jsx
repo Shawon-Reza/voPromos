@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import SuccessPage from './SuccessPage'
+import { useNavigate } from 'react-router-dom'
 import { MdOutlineCall, MdOutlineMailOutline } from 'react-icons/md'
 import { CiLocationOn } from "react-icons/ci"
 import { FaBusinessTime, FaSquareFacebook } from "react-icons/fa6"
@@ -21,8 +23,8 @@ export default function RequestQuote() {
     description: ''
   })
 
-  const [file, setFile] = useState(null)
-  const [fileName, setFileName] = useState('')
+  const [files, setFiles] = useState([])
+  const [fileNames, setFileNames] = useState([])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -30,42 +32,156 @@ export default function RequestQuote() {
   }
 
   const handleFile = (e) => {
-    const selectedFile = e.target.files?.[0]
-    if (selectedFile) {
-      setFile(selectedFile)
-      setFileName(selectedFile.name)
+    const list = Array.from(e.target.files || [])
+    if (!list.length) {
+      setFiles([])
+      setFileNames([])
+      return
+    }
+
+    // filter only image/* MIME types
+    const images = list.filter((f) => f && f.type && f.type.startsWith('image/'))
+    const rejectedCount = list.length - images.length
+    if (rejectedCount > 0) {
+      alert(`Only image files are allowed. ${rejectedCount} file(s) were ignored.`)
+    }
+
+    if (images.length) {
+      setFiles(images)
+      setFileNames(images.map((f) => f.name))
+    } else {
+      setFiles([])
+      setFileNames([])
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
 
-    console.log(form)
-    const formData = new FormData()
-    Object.entries(form).forEach(([key, value]) => {
-      formData.append(key, value)
-    })
-    if (file) {
-      formData.append('file', file)
-      console.log(formData)
+    const required = ['firstName', 'email', 'service']
+    const missing = required.filter((k) => !form[k])
+    if (missing.length > 0) {
+      alert(`Please fill required fields: ${missing.join(', ')}`)
+      setIsLoading(false)
+      return
     }
-    console.log(formData)
 
-    // try {
-    //   const res = await fetch('http://localhost:8000/api/request-quote/', {
-    //     method: 'POST',
-    //     body: formData
-    //   })
+    try {
+      let imageUrls = []
+      if (files && files.length) {
+        // Upload each file to Cloudinary and collect URLs
+        for (const f of files) {
+          const uploadData = new FormData()
+          uploadData.append('file', f)
+          uploadData.append('upload_preset', 'vopromos')
 
-    //   if (!res.ok) throw new Error('Failed to submit')
+          const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/dhxd3lxyp/image/upload`, {
+            method: 'POST',
+            body: uploadData,
+          })
 
-    //   const data = await res.json()
-    //   alert('Request submitted successfully!')
-    //   console.log(data)
-    // } catch (err) {
-    //   console.error(err)
-    //   alert('There was a problem submitting your request.')
-    // }
+          const uploadJson = await uploadRes.json()
+          if (!uploadRes.ok || !uploadJson.secure_url) {
+            console.error('Cloudinary upload error:', uploadJson)
+            alert(`File upload failed for ${f.name}. Please try again.`)
+            setIsLoading(false)
+            return
+          }
+          imageUrls.push(uploadJson.secure_url)
+        }
+      }
+
+      const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'c58f6a2d-0e6f-4872-8b44-909ce6c3622a'
+
+      const fullName = `${form.firstName || ''} ${form.lastName || ''}`.trim()
+
+      const message = `
+Quote request details:
+
+Name: ${fullName}
+Email: ${form.email || ''}
+Phone: ${form.phone || ''}
+Company: ${form.company || ''}
+Service: ${form.service || ''}
+Budget: ${form.budget || ''}
+Timeline: ${form.timeline || ''}
+
+Description:
+${form.description || ''}
+    
+${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : ''}
+    `.trim()
+
+      const emailRes = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'New quote request from website',
+          from_name: fullName,
+          email: form.email,
+          message,
+        }),
+      })
+
+      const json = await emailRes.json().catch(() => null)
+
+      if (!emailRes.ok || !json.success) {
+        console.error('Web3Forms error', json)
+        alert('Failed to send email. Please try again later.')
+        setIsLoading(false)
+        return
+      }
+
+      // Success: preserve payload, reset form/files, show success alert + modal
+      const payload = { ...form }
+      alert('Request submitted successfully!')
+      // reset form and files immediately
+      setForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        budget: '',
+        timeline: '',
+        description: ''
+      })
+      setFiles([])
+      setFileNames([])
+
+      setQuotePayload(payload)
+      setShowSuccessModal(true)
+      } catch (err) {
+        console.error('Submit error:', err)
+        alert('Something went wrong.')
+      } finally {
+        setIsLoading(false)
+      }
+  }
+
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [quotePayload, setQuotePayload] = useState(null)
+
+  const handleSuccessClose = () => {
+    setShowSuccessModal(false)
+    // reset form
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      service: '',
+      budget: '',
+      timeline: '',
+      description: ''
+    })
+    setQuotePayload(null)
   }
 
   return (
@@ -150,9 +266,9 @@ export default function RequestQuote() {
                 <label className="flex items-center gap-2 rounded-md border border-slate-200 px-4 py-2 text-sm cursor-pointer bg-[#F3F3F3] hover:bg-slate-50">
                   <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V8a4 4 0 014-4h2a4 4 0 014 4v8" /></svg>
                   <span>Choose File</span>
-                  <input type="file" onChange={handleFile} className="hidden" />
+                  <input type="file" accept="image/*" multiple onChange={handleFile} className="hidden" />
                 </label>
-                <div className="text-sm text-slate-500">{fileName || 'No file chosen'}</div>
+                <div className="text-sm text-slate-500">{(fileNames && fileNames.length) ? fileNames.join(', ') : 'No file chosen'}</div>
               </div>
             </div>
 
@@ -164,8 +280,12 @@ export default function RequestQuote() {
 
             {/* Submit */}
             <div className="mt-6 flex items-center justify-end">
-              <button type="submit" className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow">
-                Submit Request <RiSendPlaneFill />
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`inline-flex items-center gap-2 ${isLoading ? 'bg-sky-400' : 'bg-sky-600 hover:bg-sky-700'} text-white font-semibold px-5 py-2.5 rounded-lg shadow`}
+              >
+                {isLoading ? 'Submitting Request...' : 'Submit Request'} <RiSendPlaneFill />
               </button>
             </div>
           </form>

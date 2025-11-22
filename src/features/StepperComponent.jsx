@@ -26,6 +26,8 @@ export default function StepperComponent() {
   const [isLoading, setIsLoading] = useState(false)
 
   const saveHandlerRef = useRef(() => { })
+  const { scheduleData, updateSchedule } = useSchedule()
+
 
   const handleNextStep = async () => {
     setIsLoading(true)
@@ -44,7 +46,9 @@ export default function StepperComponent() {
     }, 250)
   }
 
-  const { scheduleData } = useSchedule()
+
+
+
 
   const handleConfirmBooking = async () => {
     setIsLoading(true)
@@ -56,31 +60,61 @@ export default function StepperComponent() {
       // scheduleData will now contain latest values from steps
       console.log('Confirming booking with payload:', scheduleData)
 
-      // Make the API call to create booking
-      const res = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(scheduleData),
-      })
+      // validate scheduleData: if any field is empty, block and show alert
+      const missing = Object.entries(scheduleData)
+        .filter(([k, v]) => v === null || v === undefined || v === '')
+        .map(([k]) => k)
 
-      if (!res.ok) {
-        const errText = await res.text().catch(() => 'Request failed')
-        throw new Error(errText || 'Booking request failed')
+      if (missing.length > 0) {
+        const pretty = missing.join(', ')
+        alert(`Please fill the following required fields before confirming: ${pretty}`)
+        setIsLoading(false)
+        return
       }
 
-      // on success, show modal with booking data
-      setBookingPayload(scheduleData)
-      setShowSuccessModal(true)
+      // send email via Web3Forms
+      try {
+        const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'c58f6a2d-0e6f-4872-8b44-909ce6c3622a'
+
+        const message = `New booking received:\n\nName: ${scheduleData.firstName || ''} ${scheduleData.lastName || ''}\nEmail: ${scheduleData.email || ''}\nPhone: ${scheduleData.phone || ''}\nCompany: ${scheduleData.company || ''}\nService: ${scheduleData.serviceNeeded || ''}\nDate: ${scheduleData.preferredDate || ''} ${scheduleData.preferredTime || ''} (${scheduleData.selectedDay || ''})`
+
+        const web3res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: 'Scheduled a Consultation',
+            from_name: `${scheduleData.firstName} ${scheduleData.lastName}`,
+            // name: `${scheduleData.firstName || ''} ${scheduleData.lastName || ''}`.trim(),
+            // email: scheduleData.email || '',
+            message,
+          }),
+        })
+
+        if (!web3res.ok) {
+          const txt = await web3res.text().catch(() => 'Web3Forms request failed')
+          console.warn('Web3Forms send failed:', txt)
+        } else {
+          console.log('Web3Forms email sent successfully')
+          setBookingPayload(scheduleData)
+          setShowSuccessModal(true)
+        }
+      } catch (err) {
+        console.warn('Error sending Web3Forms email:', err)
+      }
 
     } catch (err) {
       console.error('Error during confirm booking:', err)
-      setBookingPayload(scheduleData)
 
-      setShowSuccessModal(true)
     } finally {
       setIsLoading(false)
     }
   }
+
+
+
+
+
   console.log(currentStep)
   const captions = ['Date & Time', 'Your Details', 'Review & Confirm']
 
@@ -90,8 +124,26 @@ export default function StepperComponent() {
 
   const handleSuccessClose = () => {
     setShowSuccessModal(false)
-    // redirect to home after closing modal
-    // navigate('/')
+    // reset stepper to first step
+    setCurrentStep(1)
+
+    // clear schedule data in context
+    try {
+      updateSchedule('preferredDate', null)
+      updateSchedule('preferredTime', null)
+      updateSchedule('selectedDay', null)
+      updateSchedule('company', null)
+      updateSchedule('email', null)
+      updateSchedule('firstName', null)
+      updateSchedule('lastName', null)
+      updateSchedule('phone', null)
+      updateSchedule('serviceNeeded', null)
+    } catch (err) {
+      console.warn('Error resetting schedule data', err)
+    }
+
+    // clear booking payload
+    setBookingPayload(null)
   }
 
 

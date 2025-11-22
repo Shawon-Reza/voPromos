@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSchedule } from '../../contextApi/ScheduleContext'
 
+
 const services = [
     'General Consultation',
     'Voiceover Recording',
@@ -9,13 +10,25 @@ const services = [
 ]
 
 const Step2 = ({ onChange, setSaveHandler } = {}) => {
-    const { updateSchedule } = useSchedule()
+    const {scheduleData, updateSchedule } = useSchedule()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [company, setCompany] = useState('')
     const [serviceNeeded, setServiceNeeded] = useState('')
+
+    // initialize local form state from context if values exist
+    useEffect(() => {
+        if (!scheduleData) return
+
+        setFirstName(scheduleData.firstName || '')
+        setLastName(scheduleData.lastName || '')
+        setEmail(scheduleData.email || '')
+        setPhone(scheduleData.phone || '')
+        setCompany(scheduleData.company || '')
+        setServiceNeeded(scheduleData.serviceNeeded || '')
+    }, [scheduleData])
 
     const notifyParent = (patch = {}) => {
         const combined = {
@@ -131,7 +144,7 @@ const Step2 = ({ onChange, setSaveHandler } = {}) => {
                 </label>
             </div>
 
-            
+
         </section>
     )
 }
