@@ -4,29 +4,42 @@ import React, { useState, useEffect } from 'react'
 const days = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 
 const Step1 = ({ onChange, setSaveHandler } = {}) => {
-    const [selectedDay, setSelectedDay] = useState('Tue')
+    // start with no day selected so user can choose manually
+    const [selectedDay, setSelectedDay] = useState('')
     const [preferredDate, setPreferredDate] = useState('')
     const [preferredTime, setPreferredTime] = useState('')
     const {scheduleData, updateSchedule } = useSchedule();
+
+    // local YYYY-MM-DD for today's date (used as min for date input)
+    const pad = (n) => String(n).padStart(2, '0')
+    const now = new Date()
+    const todayStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
     
-    // ensure initial selectedDay is present in context on mount
+    // keep context in sync but only write when a day is chosen
     useEffect(() => {
-        if (typeof updateSchedule === 'function') updateSchedule('selectedDay', selectedDay)
+        if (selectedDay && typeof updateSchedule === 'function') updateSchedule('selectedDay', selectedDay)
     }, [selectedDay, updateSchedule])
 
 
 
 
     const handleSelectDay = (day) => {
-        setSelectedDay(day)
-        if (typeof updateSchedule === 'function') updateSchedule('selectedDay', day)
-        if (typeof onChange === 'function') onChange({ selectedDay: day, preferredDate, preferredTime })
+        // Manual selection disabled — weekday is computed from the chosen date only.
+        return
     }
 
     const handleDateChange = (e) => {
-        setPreferredDate(e.target.value)
-        if (typeof updateSchedule === 'function') updateSchedule('preferredDate', e.target.value)
-        if (typeof onChange === 'function') onChange({ selectedDay, preferredDate: e.target.value, preferredTime })
+        const val = e.target.value
+
+        // prevent selecting a past date
+        if (val && val < todayStr) {
+            console.warn('Preferred date cannot be in the past')
+            return
+        }
+
+        setPreferredDate(val)
+        if (typeof updateSchedule === 'function') updateSchedule('preferredDate', val)
+        if (typeof onChange === 'function') onChange({ selectedDay, preferredDate: val, preferredTime })
     }
 
     const handleTimeChange = (e) => {
@@ -39,6 +52,28 @@ const Step1 = ({ onChange, setSaveHandler } = {}) => {
         const payload = { selectedDay, preferredDate, preferredTime }
         console.log('Step1 payload:', payload)
     }
+
+    // If the user chooses a specific date, compute the actual weekday
+    // and sync `selectedDay` so review step shows consistent information.
+    useEffect(() => {
+        if (!preferredDate) return
+
+        try {
+            // Parse as local midnight to avoid timezone shifts when using plain YYYY-MM-DD
+            const d = new Date(preferredDate + 'T00:00:00')
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            const computed = dayNames[d.getDay()]
+
+            if (computed && computed !== selectedDay) {
+                setSelectedDay(computed)
+                if (typeof updateSchedule === 'function') updateSchedule('selectedDay', computed)
+                if (typeof onChange === 'function') onChange({ selectedDay: computed, preferredDate, preferredTime })
+            }
+        } catch (err) {
+            // parsing failed — ignore and keep existing selection
+            console.warn('Could not parse preferredDate for weekday sync', err)
+        }
+    }, [preferredDate])
 
     // register save handler so parent can request persisting this step's values
     useEffect(() => {
@@ -68,12 +103,13 @@ const Step1 = ({ onChange, setSaveHandler } = {}) => {
                             key={day}
                             type="button"
                             aria-pressed={selectedDay === day}
-                            onClick={() => handleSelectDay(day)}
+                            disabled
                             className={
-                                `flex-1 min-w-0 px-2 sm:px-5 text-sm sm:text-md cursor-pointer py-2 rounded-md border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 text-center ` +
+                                `flex-1 min-w-0 px-2 sm:px-5 text-sm sm:text-md py-2 rounded-md border transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 text-center ` +
                                 (selectedDay === day
                                     ? 'bg-sky-600 text-white border-sky-600'
-                                    : 'bg-slate-100 text-slate-700 border-slate-200')
+                                    : 'bg-slate-100 text-slate-700 border-slate-200') +
+                                ' opacity-60 cursor-not-allowed'
                             }
                         >
                             {day}
@@ -90,6 +126,7 @@ const Step1 = ({ onChange, setSaveHandler } = {}) => {
                     <input
                         type="date"
                         value={preferredDate}
+                        min={todayStr}
                         onChange={handleDateChange}
                         className="px-3 py-2 border rounded-md bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sky-300"
                         aria-label="Preferred date"
@@ -114,6 +151,10 @@ const Step1 = ({ onChange, setSaveHandler } = {}) => {
                     </select>
                 </label>
             </div>
+
+            {preferredDate && selectedDay && (
+                <p className="text-sm text-slate-500 mt-2 text-start">Day locked to <span className="font-semibold text-sky-600">{selectedDay}</span> because a specific date was chosen.</p>
+            )}
 
            
         </section>
