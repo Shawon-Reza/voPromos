@@ -189,7 +189,7 @@ export default function StepperComponent() {
           variant="outline"
           className="w-32 cursor-pointer  hover:bg-[#0E8BD5] hover:text-white hover:scale-110 transform transition-all ease-in-out duration-700 shadow-2xl border-[#0E8BD5]"
           onClick={() => setCurrentStep((prev) => prev - 1)}
-          disabled={currentStep === 1}
+          disabled={currentStep === 1 || isLoading}
         >
           Prev step
         </Button>
@@ -197,9 +197,13 @@ export default function StepperComponent() {
           variant="outline"
           className="w-32 cursor-pointer bg-[#0E8BD5] text-white hover:bg-[#0E8BD5] hover:text-white hover:scale-110 transform transition-all ease-in-out duration-700 shadow-2xl"
           onClick={currentStep === steps.length ? handleConfirmBooking : handleNextStep}
-          disabled={currentStep > steps.length}
+          disabled={currentStep > steps.length || isLoading}
         >
-          {currentStep === steps.length ? 'Confirm booking' : 'Next step'}
+          {currentStep === steps.length
+            ? isLoading
+              ? 'Confirming...'
+              : 'Confirm booking'
+            : 'Next step'}
         </Button>
       </div>
 
