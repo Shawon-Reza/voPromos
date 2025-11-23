@@ -93,7 +93,7 @@ export default function RequestQuote() {
         }
       }
 
-      const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'c58f6a2d-0e6f-4872-8b44-909ce6c3622a'
+      const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || '0053db62-3286-456b-8b7f-0b838f2b91f0'
 
       const fullName = `${form.firstName || ''} ${form.lastName || ''}`.trim()
 
@@ -137,6 +137,8 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
 
       // Success: preserve payload, reset form/files, show success alert + modal
       const payload = { ...form }
+      
+      console.log(payload)
       toast.success('Request submitted successfully!')
       // reset form and files immediately
       setForm({
@@ -155,12 +157,12 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
 
       setQuotePayload(payload)
       setShowSuccessModal(true)
-      } catch (err) {
-        console.error('Submit error:', err)
-        toast.info('Something went wrong.')
-      } finally {
-        setIsLoading(false)
-      }
+    } catch (err) {
+      console.error('Submit error:', err)
+      toast.info('Something went wrong.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
 
@@ -255,7 +257,7 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
               <InputField name="phone" label="Phone Number" value={form.phone} onChange={handleChange} />
               <InputField name="company" label="Company Name" value={form.company} onChange={handleChange} />
 
-              <SelectField name="service" label="Service Needed" value={form.service} onChange={handleChange} options={["Product Sourcing", "Supplier Management","Price Negotiation & Contracting", "Shipping & Logistics", "Warehousing & Storage","Consulting & Procurement Strategy"]} />
+              <SelectField name="service" label="Service Needed" value={form.service} onChange={handleChange} options={["Product Sourcing", "Supplier Management", "Price Negotiation & Contracting", "Shipping & Logistics", "Warehousing & Storage", "Consulting & Procurement Strategy"]} />
               <InputField name="budget" label="Budget Range $" value={form.budget} onChange={handleChange} />
               <SelectField name="timeline" label="Timeline" value={form.timeline} onChange={handleChange} options={["1-3 months", "3-6 months", "6+ months"]} />
             </div>
