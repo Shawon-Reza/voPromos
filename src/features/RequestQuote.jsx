@@ -75,9 +75,9 @@ export default function RequestQuote() {
         for (const f of files) {
           const uploadData = new FormData()
           uploadData.append('file', f)
-          uploadData.append('upload_preset', 'vopromos')
+          uploadData.append('upload_preset', 'VoPromos')
 
-          const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/dhxd3lxyp/image/upload`, {
+          const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/dwujij1xx/image/upload`, {
             method: 'POST',
             body: uploadData,
           })
