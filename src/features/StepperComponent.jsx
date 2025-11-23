@@ -75,7 +75,7 @@ export default function StepperComponent() {
 
       // send email via Web3Forms
       try {
-        const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'c58f6a2d-0e6f-4872-8b44-909ce6c3622a'
+        const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'bd28ebf2-950b-49b3-84bb-eff66842743f'
 
         const message = `New booking received:\n\nName: ${scheduleData.firstName || ''} ${scheduleData.lastName || ''}\nEmail: ${scheduleData.email || ''}\nPhone: ${scheduleData.phone || ''}\nCompany: ${scheduleData.company || ''}\nService: ${scheduleData.serviceNeeded || ''}\nDate: ${scheduleData.preferredDate || ''} ${scheduleData.preferredTime || ''} (${scheduleData.selectedDay || ''})`
 
