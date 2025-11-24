@@ -61,7 +61,7 @@ const Step3 = ({ data = {}, onConfirm } = {}) => {
                 </div>
             </div>
 
-            
+
         </section>
     )
 }
