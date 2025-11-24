@@ -218,7 +218,7 @@ ${imageUrls && imageUrls.length ? `Uploaded Files:\n${imageUrls.join('\n')}` : '
               <div className="mt-6 space-y-4">
                 <InfoItem icon={<MdOutlineMailOutline size={24} />} title="Email" value="info@vopromos.com" />
                 <InfoItem icon={<MdOutlineCall size={24} />} title="Phone Number" value="(623) 279-3800" />
-                <InfoItem icon={<CiLocationOn size={24} />} title="Location" value="2942 N 24th St Ste 115 PMB 333050 Phoenix, Arizona 85016-7849 US" />
+                <InfoItem icon={<CiLocationOn size={24} />} title="Location" value={<><span>2942 N 24th St Ste 115 PMB 333050</span><br /><span>Phoenix, Arizona 85016-7849 US</span></>} />
                 <InfoItem icon={<FaBusinessTime size={24} />} title="Business Hours" value="Monday - Friday: 9:00 AM - 5:00 PM" />
               </div>
 
