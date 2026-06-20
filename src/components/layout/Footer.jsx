@@ -122,12 +122,16 @@ const Footer = () => {
 
       <div className="bg-[#062233] text-slate-400 text-sm py-4 px-6 md:px-12 lg:px-20">
         <div className="flex flex-col md:flex-row justify-center gap-2">
-          <div>
+          {/* <div>
             © {new Date().getFullYear()} VoPromos LLC. All rights reserved.
-            <span> | Developed by 
+            <span> | Developed by
               <a href="https://www.shawonreza.site/home" target="_blank" rel="noopener noreferrer" className="hover:text-white"> Reza</a>
             </span>
-          </div>        </div>
+          </div> */}
+          <div>
+            © {new Date().getFullYear()} VoPromos LLC. All rights reserved.
+          </div>
+        </div>
       </div>
     </footer>
   )
